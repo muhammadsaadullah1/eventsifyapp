@@ -1,3 +1,4 @@
+
 {
   "expo": {
     "name": "eventsifyapp",
@@ -6,24 +7,43 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "jsEngine": "hermes",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.eventsifyapp",
+      "config": {
+        "googleMapsApiKey": "AIzaSyB6V2KfLR98cmYTiSgmD5MIKwFuqCipY1g"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.yourcompany.eventsifyapp",
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB6V2KfLR98cmYTiSgmD5MIKwFuqCipY1g"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location", 
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Eventsify to use your location."
+        }
+      ]
+    ]
   }
 }
