@@ -42,6 +42,8 @@ export interface Event {
   tags?: string[];
   images?: string[];
   source?: 'app' | 'twitter';
+  media_urls?: string[];
+  deep_link?: string;
 }
 
 // Media Types

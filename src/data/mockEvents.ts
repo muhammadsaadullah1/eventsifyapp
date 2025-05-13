@@ -74,137 +74,157 @@ export interface Event {
   streamUrl?: string; // URL for virtual events
 }
 
-// Mock data for events near Karachi, Pakistan
+// Mock data for events in the United States
 const mockEvents: Event[] = [
   {
     id: 'event-001',
-    bannerImage: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1287&auto=format&fit=crop',
-    capacity: 2000,
+    bannerImage: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1470&auto=format&fit=crop',
+    capacity: 60000,
     highlights: [
-      'Over 50 food stalls featuring international and local cuisines',
-      'Live cooking demonstrations by celebrity chefs',
-      'Food competitions with prizes',
-      'Kids zone with child-friendly activities'
+      'Headlining performance by Grammy award-winning artists',
+      'Multiple stages featuring diverse music genres',
+      'Gourmet food and beverage options',
+      'Interactive art installations and merchandise village'
     ],
     faqs: [
-      {question: 'Is entry free for children?', answer: 'Yes, children under 12 enter free'},
-      {question: 'Are pets allowed?', answer: 'Unfortunately, no pets are allowed at the food festival'}
+      {question: 'Is there an age restriction?', answer: 'Yes, attendees must be 18+ or accompanied by an adult'},
+      {question: 'Can I bring my own food/drinks?', answer: 'No outside food or beverages are permitted'}
     ],
     sponsors: [
-      {id: 'sp-001', name: 'Karachi Eats', logo: 'https://example.com/logos/karachi-eats.png'},
-      {id: 'sp-002', name: 'Food Network Pakistan', logo: 'https://example.com/logos/food-network.png'}
+      {id: 'sp-001', name: 'LiveNation', logo: 'https://example.com/logos/livenation.png'},
+      {id: 'sp-002', name: 'Spotify', logo: 'https://example.com/logos/spotify.png'}
     ],
-    title: 'Karachi Food Festival 2025',
-    description: 'Experience the vibrant flavors of Karachi\'s diverse culinary scene. This three-day festival features top chefs, food stalls, cooking demonstrations, and live music. Indulge in traditional Pakistani dishes, street food favorites, and international cuisines all in one place.',
-    date: new Date(2025, 5, 15, 12, 0), // June 15, 2025 at 12 PM
-    endDate: new Date(2025, 5, 17, 22, 0), // June 17, 2025 at 10 PM
+    title: 'Coachella Valley Music Festival 2025',
+    description: 'Experience the world-famous Coachella Valley Music and Arts Festival, featuring the hottest artists across multiple genres. This three-day event combines cutting-edge musical performances with breathtaking art installations in the beautiful desert landscape of Indio, California.',
+    date: new Date(2025, 3, 11, 12, 0), // April 11, 2025 at 12 PM
+    endDate: new Date(2025, 3, 13, 23, 59), // April 13, 2025 at 11:59 PM
     location: {
-      latitude: 24.8607,
-      longitude: 67.0011,
-      address: 'Beach Park, Clifton',
-      city: 'Karachi',
-      state: 'Sindh',
-      country: 'Pakistan'
+      latitude: 33.6823,
+      longitude: -116.2380,
+      address: 'Empire Polo Club',
+      city: 'Indio',
+      state: 'California',
+      country: 'United States'
     },
-    category: 'Food & Drink',
-    tags: ['food', 'festival', 'cuisine', 'music'],
-    coverImage: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1',
-    price: 1500,
+    category: 'Music',
+    tags: ['music', 'festival', 'concert', 'arts', 'celebrity'],
+    coverImage: 'https://images.unsplash.com/photo-1506157786151-b8491531f063',
+    price: 499,
     organizer: {
       id: 'org-001',
-      name: 'Karachi Food Network',
+      name: 'Goldenvoice',
       logo: 'https://randomuser.me/api/portraits/men/1.jpg'
     },
     attendees: [
-      { id: 'user-101', name: 'Fatima Ahmed', avatar: 'https://randomuser.me/api/portraits/women/1.jpg', status: 'going' },
-      { id: 'user-102', name: 'Ali Khan', avatar: 'https://randomuser.me/api/portraits/men/2.jpg', status: 'going' },
-      { id: 'user-103', name: 'Zainab Malik', avatar: 'https://randomuser.me/api/portraits/women/3.jpg', status: 'interested' },
-      { id: 'user-104', name: 'Omar Shah', avatar: 'https://randomuser.me/api/portraits/men/4.jpg', status: 'going' },
-      { id: 'user-105', name: 'Aisha Imran', avatar: 'https://randomuser.me/api/portraits/women/5.jpg', status: 'invited' }
+      { id: 'user-101', name: 'Emma Johnson', avatar: 'https://randomuser.me/api/portraits/women/1.jpg', status: 'going' },
+      { id: 'user-102', name: 'Michael Rodriguez', avatar: 'https://randomuser.me/api/portraits/men/2.jpg', status: 'going' },
+      { id: 'user-103', name: 'Sofia Chen', avatar: 'https://randomuser.me/api/portraits/women/3.jpg', status: 'interested' },
+      { id: 'user-104', name: 'James Wilson', avatar: 'https://randomuser.me/api/portraits/men/4.jpg', status: 'going' },
+      { id: 'user-105', name: 'Olivia Martinez', avatar: 'https://randomuser.me/api/portraits/women/5.jpg', status: 'invited' }
     ],
     isHot: true,
     isFeatured: true,
     media: [
-      { id: 'media-001', type: 'image', url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1' },
-      { id: 'media-002', type: 'image', url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836' },
-      { id: 'media-003', type: 'image', url: 'https://images.unsplash.com/photo-1567188040759-fb8a9eddc10d' },
-      { id: 'media-004', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-friends-eating-pizza-together-at-a-restaurant-37053-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40' },
-      { id: 'media-005', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-cooking-indian-traditional-food-of-spicy-curry-in-a-professional-43215-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1' }
+      { id: 'media-001', type: 'image', url: 'https://images.unsplash.com/photo-1506157786151-b8491531f063' },
+      { id: 'media-002', type: 'image', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819' },
+      { id: 'media-003', type: 'image', url: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec' },
+      { id: 'media-004', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-partying-at-a-concert-4196-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3' },
+      { id: 'media-005', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-dj-playing-music-in-a-concert-with-light-effects-4818-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1506157786151-b8491531f063' }
     ],
     distance: 2.4
   },
   {
     id: 'event-002',
-    bannerImage: 'https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?q=80&w=1974&auto=format&fit=crop',
-    capacity: 1500,
-    title: 'Tech Innovators Summit',
-    description: 'Join the biggest tech conference in Pakistan. Network with industry leaders, attend workshops on AI, blockchain, and cybersecurity, and discover the latest innovations. Perfect for entrepreneurs, developers, and tech enthusiasts looking to stay at the cutting edge.',
-    date: new Date(2025, 5, 20, 9, 0), // June 20, 2025 at 9 AM
-    endDate: new Date(2025, 5, 21, 18, 0), // June 21, 2025 at 6 PM
+    bannerImage: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1470&auto=format&fit=crop',
+    capacity: 5000,
+    highlights: [
+      '48-hour nonstop coding competition',
+      'Over $100,000 in prizes and sponsor awards',
+      'Workshops led by industry experts from leading tech companies',
+      'Networking opportunities with tech recruiters and VCs'
+    ],
+    faqs: [
+      {question: 'Do I need a team to participate?', answer: 'Teams of up to 4 are recommended, but we also have team matching events'},
+      {question: 'What should I bring?', answer: 'Laptop, chargers, personal items - meals and snacks are provided'}
+    ],
+    sponsors: [
+      {id: 'sp-003', name: 'Google', logo: 'https://example.com/logos/google.png'},
+      {id: 'sp-004', name: 'Microsoft', logo: 'https://example.com/logos/microsoft.png'},
+      {id: 'sp-005', name: 'Amazon Web Services', logo: 'https://example.com/logos/aws.png'}
+    ],
+    title: 'HackMIT 2025',
+    description: 'Join over 1,000 talented student hackers for one of the largest collegiate hackathons in the world. This 48-hour event brings together tech enthusiasts, developers, designers, and entrepreneurs to build innovative solutions to real-world problems. With mentorship from industry leaders, workshops, and substantial prizes, this is your chance to showcase your skills and network with top tech companies.',
+    date: new Date(2025, 8, 15, 18, 0), // September 15, 2025 at 6 PM
+    endDate: new Date(2025, 8, 17, 18, 0), // September 17, 2025 at 6 PM
     location: {
-      latitude: 24.8297,
-      longitude: 67.0812,
-      address: 'Expo Center, University Road',
-      city: 'Karachi',
-      state: 'Sindh',
-      country: 'Pakistan'
+      latitude: 42.3601,
+      longitude: -71.0942,
+      address: 'MIT Johnson Athletic Center',
+      city: 'Cambridge',
+      state: 'Massachusetts',
+      country: 'United States'
     },
     category: 'Technology',
-    tags: ['tech', 'conference', 'innovation', 'networking'],
-    coverImage: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
-    price: 5000,
+    tags: ['hackathon', 'coding', 'tech', 'students', 'competition'],
+    coverImage: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
+    price: 'free',
     organizer: {
       id: 'org-002',
-      name: 'TechPak',
-      logo: 'https://randomuser.me/api/portraits/men/6.jpg'
+      name: 'MIT HackMIT Team',
+      logo: 'https://randomuser.me/api/portraits/men/6.jpg',
+      contactEmail: 'hackmit@mit.edu'
     },
     attendees: [
-      { id: 'user-106', name: 'Hassan Ahmed', avatar: 'https://randomuser.me/api/portraits/men/7.jpg', status: 'going' },
-      { id: 'user-107', name: 'Sara Khan', avatar: 'https://randomuser.me/api/portraits/women/8.jpg', status: 'interested' },
-      { id: 'user-108', name: 'Bilal Raza', avatar: 'https://randomuser.me/api/portraits/men/9.jpg', status: 'going' },
-      { id: 'user-109', name: 'Hina Shah', avatar: 'https://randomuser.me/api/portraits/women/10.jpg', status: 'going' }
+      { id: 'user-106', name: 'Ethan Williams', avatar: 'https://randomuser.me/api/portraits/men/7.jpg', status: 'going' },
+      { id: 'user-107', name: 'Ava Garcia', avatar: 'https://randomuser.me/api/portraits/women/8.jpg', status: 'interested' },
+      { id: 'user-108', name: 'Jackson Brown', avatar: 'https://randomuser.me/api/portraits/men/9.jpg', status: 'going' },
+      { id: 'user-109', name: 'Isabella Lee', avatar: 'https://randomuser.me/api/portraits/women/10.jpg', status: 'going' }
     ],
     isHot: true,
-    isFeatured: false,
+    isFeatured: true,
     media: [
-      { id: 'media-005', type: 'image', url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c' },
-      { id: 'media-006', type: 'image', url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87' },
-      { id: 'media-007', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-people-working-on-their-laptops-in-a-workspace-environment-27023-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4' }
+      { id: 'media-006', type: 'image', url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d' },
+      { id: 'media-007', type: 'image', url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97' },
+      { id: 'media-008', type: 'image', url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5' },
+      { id: 'media-009', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-group-of-young-people-working-with-their-laptops-4790-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4' }
     ],
-    distance: 7.8
+    distance: 1.2
   },
   {
     id: 'event-003',
-    capacity: 3000,
-    bannerImage: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=2070&auto=format&fit=crop',
-    title: 'Beachside Music Festival',
-    description: 'Dance to the rhythm of the waves at Karachi\'s premier beachside music festival. With multiple stages featuring local and international artists, this vibrant event combines the best of electronic, pop, and traditional music. Enjoy food stalls, art installations, and an unforgettable sunset experience.',
-    date: new Date(2025, 5, 25, 16, 0), // June 25, 2025 at 4 PM
-    endDate: new Date(2025, 5, 26, 2, 0), // June 26, 2025 at 2 AM
+    capacity: 50000,
+    bannerImage: 'https://images.unsplash.com/photo-1591189824361-e61daf9c5a6c?q=80&w=1470&auto=format&fit=crop',
+    title: 'Climate Action March DC 2025',
+    description: 'Join thousands of activists, community leaders, and concerned citizens for the largest climate protest of the year. March from the White House to the Capitol to demand urgent action on climate change. This peaceful demonstration will include speeches from environmental experts, climate activists, and political leaders committed to fighting for a sustainable future.',
+    date: new Date(2025, 3, 22, 10, 0), // April 22, 2025 at 10 AM (Earth Day)
+    endDate: new Date(2025, 3, 22, 18, 0), // April 22, 2025 at 6 PM
     location: {
-      latitude: 24.7914,
-      longitude: 66.9947,
-      address: 'Sea View Beach',
-      city: 'Karachi',
-      state: 'Sindh',
-      country: 'Pakistan'
+      latitude: 38.8977,
+      longitude: -77.0365,
+      address: 'National Mall',
+      city: 'Washington',
+      state: 'DC',
+      country: 'United States'
     },
-    category: 'Music',
-    tags: ['music', 'festival', 'beach', 'nightlife'],
-    coverImage: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea',
-    price: 3000,
+    category: 'Community',
+    tags: ['protest', 'activism', 'climate', 'march', 'politics'],
+    coverImage: 'https://images.unsplash.com/photo-1591189824361-e61daf9c5a6c',
+    price: 'free',
     organizer: {
       id: 'org-003',
-      name: 'Karachi Beats',
-      logo: 'https://randomuser.me/api/portraits/women/11.jpg'
+      name: 'Climate Action Coalition',
+      logo: 'https://randomuser.me/api/portraits/women/11.jpg',
+      contactEmail: 'info@climateactioncoalition.org'
     },
     attendees: [
-      { id: 'user-110', name: 'Kamran Ali', avatar: 'https://randomuser.me/api/portraits/men/12.jpg', status: 'going' },
-      { id: 'user-111', name: 'Amina Farooq', avatar: 'https://randomuser.me/api/portraits/women/13.jpg', status: 'going' },
-      { id: 'user-112', name: 'Faisal Khan', avatar: 'https://randomuser.me/api/portraits/men/14.jpg', status: 'interested' },
-      { id: 'user-113', name: 'Nadia Malik', avatar: 'https://randomuser.me/api/portraits/women/15.jpg', status: 'going' },
-      { id: 'user-114', name: 'Tariq Jamil', avatar: 'https://randomuser.me/api/portraits/men/16.jpg', status: 'going' },
-      { id: 'user-115', name: 'Sana Ahmed', avatar: 'https://randomuser.me/api/portraits/women/17.jpg', status: 'interested' }
+      { id: 'user-110', name: 'Noah Thompson', avatar: 'https://randomuser.me/api/portraits/men/12.jpg', status: 'going' },
+      { id: 'user-111', name: 'Madison Parker', avatar: 'https://randomuser.me/api/portraits/women/13.jpg', status: 'interested' },
+      { id: 'user-112', name: 'Gabriel Rodriguez', avatar: 'https://randomuser.me/api/portraits/men/14.jpg', status: 'going' },
+      { id: 'user-113', name: 'Zoe Mitchell', avatar: 'https://randomuser.me/api/portraits/women/15.jpg', status: 'interested' },
+      { id: 'user-114', name: 'Lucas Cooper', avatar: 'https://randomuser.me/api/portraits/men/16.jpg', status: 'invited' },
+      { id: 'user-115', name: 'Abigail Turner', avatar: 'https://randomuser.me/api/portraits/women/17.jpg', status: 'going' },
+      { id: 'user-116', name: 'Maya Johnson', avatar: 'https://randomuser.me/api/portraits/women/20.jpg', status: 'going' },
+      { id: 'user-117', name: 'Elijah Washington', avatar: 'https://randomuser.me/api/portraits/men/21.jpg', status: 'going' }
     ],
     isHot: true,
     isFeatured: true,
@@ -297,82 +317,128 @@ const mockEvents: Event[] = [
   },
   {
     id: 'event-006',
-    capacity: 250,
+    capacity: 500,
     bannerImage: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1974&auto=format&fit=crop',
-    title: 'Business Networking Gala',
-    description: 'Turn your idea into reality in just 54 hours. Work with mentors, build a prototype, and pitch to investors at this intense entrepreneurship event. Perfect for aspiring entrepreneurs, designers, developers, and marketers wanting to test their ideas in a supportive environment.',
+    title: 'Silicon Valley StartupWeekend 2025',
+    description: 'Turn your idea into reality in just 54 hours. Work with mentors from Google, Apple, and Meta to build a prototype and pitch to top-tier venture capitalists at this intense entrepreneurship event. Perfect for aspiring entrepreneurs, designers, developers, and marketers wanting to test their ideas in a supportive environment.',
     date: new Date(2025, 6, 18, 17, 0), // July 18, 2025 at 5 PM
     endDate: new Date(2025, 6, 20, 21, 0), // July 20, 2025 at 9 PM
     location: {
-      latitude: 24.8604,
-      longitude: 67.0109,
-      address: 'National Incubation Center, NED University',
-      city: 'Karachi',
-      state: 'Sindh',
-      country: 'Pakistan'
+      latitude: 37.3882,
+      longitude: -122.0833,
+      address: 'Googleplex, 1600 Amphitheatre Parkway',
+      city: 'Mountain View',
+      state: 'CA',
+      country: 'United States'
     },
     category: 'Business',
-    tags: ['startup', 'entrepreneurship', 'networking', 'pitching'],
+    tags: ['startup', 'entrepreneurship', 'networking', 'pitching', 'silicon valley'],
     coverImage: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644',
-    price: 2500,
+    price: 249,
     organizer: {
       id: 'org-006',
-      name: 'Startup Karachi',
-      logo: 'https://randomuser.me/api/portraits/men/27.jpg'
+      name: 'Techstars Silicon Valley',
+      logo: 'https://randomuser.me/api/portraits/men/27.jpg',
+      contactEmail: 'startups@techstarssv.org'
     },
     attendees: [
-      { id: 'user-123', name: 'Danish Ali', avatar: 'https://randomuser.me/api/portraits/men/28.jpg', status: 'going' },
-      { id: 'user-124', name: 'Mehwish Khan', avatar: 'https://randomuser.me/api/portraits/women/29.jpg', status: 'interested' },
-      { id: 'user-125', name: 'Usman Farooq', avatar: 'https://randomuser.me/api/portraits/men/30.jpg', status: 'invited' }
+      { id: 'user-123', name: 'Brandon Mitchell', avatar: 'https://randomuser.me/api/portraits/men/28.jpg', status: 'going' },
+      { id: 'user-124', name: 'Jessica Wong', avatar: 'https://randomuser.me/api/portraits/women/29.jpg', status: 'interested' },
+      { id: 'user-125', name: 'Tyler Rodriguez', avatar: 'https://randomuser.me/api/portraits/men/30.jpg', status: 'invited' },
+      { id: 'user-126', name: 'Emma Chen', avatar: 'https://randomuser.me/api/portraits/women/25.jpg', status: 'going' }
     ],
     isHot: true,
     isFeatured: false,
     media: [
       { id: 'media-018', type: 'image', url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644' },
       { id: 'media-019', type: 'image', url: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5' },
-      { id: 'media-020', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-marathon-runners-racing-on-a-crowded-city-street-5133-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5' },
+      { id: 'media-020', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-young-adults-brainstorming-ideas-in-a-meeting-at-the-office-41703-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5' },
       { id: 'media-021', type: 'image', url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7' }
     ],
     distance: 6.3
   },
   {
     id: 'event-007',
-    capacity: 120,
-    bannerImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1820&auto=format&fit=crop',
-    title: 'Wellness & Yoga Retreat',
-    description: 'Escape the city hustle for a day of mindfulness and relaxation. This beachside retreat offers yoga sessions, meditation workshops, nutritional guidance, and holistic healing therapies. Suitable for all experience levels, with expert instructors to guide beginners. Leave feeling rejuvenated and centered.',
-    date: new Date(2025, 6, 5, 7, 0), // July 5, 2025 at 7 AM
-    endDate: new Date(2025, 6, 5, 19, 0), // July 5, 2025 at 7 PM
+    capacity: 35000,
+    bannerImage: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1820&auto=format&fit=crop',
+    title: 'SXSW Music Festival 2025',
+    description: 'Experience the world\'s premier gathering for music, technology, and film. SXSW brings together artists, innovators, and thinkers from across the globe for ten days of performances, panel discussions, screenings, and networking events. Discover emerging talent and industry leaders in Austin\'s vibrant cultural scene.',
+    date: new Date(2025, 2, 13, 10, 0), // March 13, 2025 at 10 AM
+    endDate: new Date(2025, 2, 22, 23, 0), // March 22, 2025 at 11 PM
     location: {
-      latitude: 24.7925,
-      longitude: 66.9873,
-      address: 'Sandspit Beach',
-      city: 'Karachi',
-      state: 'Sindh',
-      country: 'Pakistan'
+      latitude: 30.2672,
+      longitude: -97.7431,
+      address: 'Austin Convention Center',
+      city: 'Austin',
+      state: 'TX',
+      country: 'United States'
     },
-    category: 'Health & Wellness',
-    tags: ['yoga', 'wellness', 'meditation', 'retreat'],
-    coverImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b',
-    price: 3500,
+    category: 'Music',
+    tags: ['festival', 'music', 'technology', 'film', 'networking'],
+    coverImage: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3',
+    price: 1695,
     organizer: {
       id: 'org-007',
-      name: 'Mindful Living',
-      logo: 'https://randomuser.me/api/portraits/women/31.jpg'
+      name: 'SXSW LLC',
+      logo: 'https://randomuser.me/api/portraits/women/31.jpg',
+      contactEmail: 'info@sxsw.com'
     },
     attendees: [
-      { id: 'user-126', name: 'Saima Iqbal', avatar: 'https://randomuser.me/api/portraits/women/32.jpg', status: 'going' },
-      { id: 'user-127', name: 'Fahad Khan', avatar: 'https://randomuser.me/api/portraits/men/33.jpg', status: 'interested' },
-      { id: 'user-128', name: 'Natasha Ali', avatar: 'https://randomuser.me/api/portraits/women/34.jpg', status: 'going' }
+      { id: 'user-127', name: 'Jordan Smith', avatar: 'https://randomuser.me/api/portraits/men/33.jpg', status: 'going' },
+      { id: 'user-128', name: 'Olivia Martinez', avatar: 'https://randomuser.me/api/portraits/women/34.jpg', status: 'interested' },
+      { id: 'user-129', name: 'Ryan Thompson', avatar: 'https://randomuser.me/api/portraits/men/35.jpg', status: 'going' },
+      { id: 'user-130', name: 'Sarah Lee', avatar: 'https://randomuser.me/api/portraits/women/36.jpg', status: 'going' }
     ],
-    isHot: false,
+    isHot: true,
     isFeatured: true,
     media: [
-      { id: 'media-021', type: 'image', url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b' },
-      { id: 'media-022', type: 'image', url: 'https://images.unsplash.com/photo-1588286840104-8957b019727f' },
-      { id: 'media-023', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-woman-doing-yoga-in-an-interior-garden-4179-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1549576490-b0b4831ef60a' }
+      { id: 'media-024', type: 'image', url: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3' },
+      { id: 'media-025', type: 'image', url: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4' },
+      { id: 'media-026', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-dj-playing-music-at-a-concert-4815-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7' },
+      { id: 'media-027', type: 'image', url: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec' }
     ],
-    distance: 9.7
+    distance: 7.8
+  },
+  {
+    id: 'event-008',
+    capacity: 20000,
+    bannerImage: 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852?q=80&w=1770&auto=format&fit=crop',
+    title: 'Chicago Food Festival 2025',
+    description: 'Indulge in Chicago\'s most diverse culinary experience featuring over 200 local restaurants, celebrity chef demonstrations, and food competitions. Sample everything from deep-dish pizza to haute cuisine while enjoying live music and entertainment. A must-attend event for foodies and culinary enthusiasts.',
+    date: new Date(2025, 7, 8, 11, 0), // August 8, 2025 at 11 AM
+    endDate: new Date(2025, 7, 10, 22, 0), // August 10, 2025 at 10 PM
+    location: {
+      latitude: 41.8781,
+      longitude: -87.6298,
+      address: 'Grant Park',
+      city: 'Chicago',
+      state: 'IL',
+      country: 'United States'
+    },
+    category: 'Food & Drink',
+    tags: ['food', 'festival', 'culinary', 'tasting', 'chicago'],
+    coverImage: 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852',
+    price: 75,
+    organizer: {
+      id: 'org-008',
+      name: 'Chicago Culinary Events',
+      logo: 'https://randomuser.me/api/portraits/men/40.jpg',
+      contactEmail: 'info@chicagofoodfest.com'
+    },
+    attendees: [
+      { id: 'user-131', name: 'Michael Wilson', avatar: 'https://randomuser.me/api/portraits/men/41.jpg', status: 'going' },
+      { id: 'user-132', name: 'Jennifer Davis', avatar: 'https://randomuser.me/api/portraits/women/42.jpg', status: 'interested' },
+      { id: 'user-133', name: 'David Johnson', avatar: 'https://randomuser.me/api/portraits/men/43.jpg', status: 'going' }
+    ],
+    isHot: true,
+    isFeatured: true,
+    media: [
+      { id: 'media-028', type: 'image', url: 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852' },
+      { id: 'media-029', type: 'image', url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1' },
+      { id: 'media-030', type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-friends-eating-pizza-while-hanging-out-together-at-home-6550-large.mp4', thumbnail: 'https://images.unsplash.com/photo-1573225342350-16731dd9bf3d' },
+      { id: 'media-031', type: 'image', url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0' }
+    ],
+    distance: 12.1
   }
 ];
 
@@ -430,7 +496,7 @@ export const searchEvents = (query: string): Event[] => {
 };
 
 // Calculate distance between two coordinates (in kilometers)
-const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+export const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371; // Radius of the earth in km
   const dLat = deg2rad(lat2 - lat1);
   const dLon = deg2rad(lon2 - lon1);

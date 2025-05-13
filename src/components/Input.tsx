@@ -11,6 +11,7 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '../contexts/ThemeContext';
 import { THEMES, TYPOGRAPHY, SPACING, BORDER_RADIUS, getThemeColors } from '../constants/theme';
+import { createTextStyle } from '../utils/styleUtils';
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -82,8 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.M,
   },
   label: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: TYPOGRAPHY.LABELS.SIZE,
+    ...createTextStyle(TYPOGRAPHY.LABELS),
     marginBottom: SPACING.XS,
   },
   inputContainer: {
@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: TYPOGRAPHY.BODY.SIZE,
+    ...createTextStyle(TYPOGRAPHY.BODY),
     height: '100%',
   },
   icon: {
@@ -107,10 +106,11 @@ const styles = StyleSheet.create({
     padding: SPACING.XS,
   },
   errorText: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 12,
-    color: '#FF3B30',
-    marginTop: 4,
+    ...createTextStyle(TYPOGRAPHY.LABELS, 'SIZE', {
+      fontSize: 12,
+      color: '#FF3B30',
+      marginTop: 4,
+    }),
   },
 });
 

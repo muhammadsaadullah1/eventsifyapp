@@ -15,6 +15,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
 import Button from '../../components/Button';
 import supabase from '../../supabase/supabase';
 import { Event } from '../../types';
@@ -297,8 +298,7 @@ const styles = StyleSheet.create({
     padding: SPACING.L,
   },
   title: {
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: TYPOGRAPHY.HEADINGS.XL,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, 'XL'),
     marginBottom: SPACING.XS,
   },
   profileCard: {

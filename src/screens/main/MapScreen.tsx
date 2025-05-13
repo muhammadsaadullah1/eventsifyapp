@@ -3,22 +3,23 @@ import {
   View, 
   Text, 
   StyleSheet, 
-  SafeAreaView, 
   TouchableOpacity,
   Animated,
   Dimensions,
   Alert
 } from 'react-native';
+import SafeAreaWrapper from '../../components/SafeAreaWrapper';
 // Import MapView without explicit provider for better compatibility
-import MapView, { Marker, Region } from 'react-native-maps';
+import MapView, { Marker, Region, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '../../contexts/ThemeContext';
-import { TYPOGRAPHY, SPACING, SHADOWS, getThemeColors } from '../../constants/theme';
-import { Event } from '../../types';
-import supabase from '../../supabase/supabase';
+import { TYPOGRAPHY, SPACING, SHADOWS, FONT_SIZE, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
+import { COLORS } from '../../constants/colors';
+import mockEvents, { Event as MockEvent, getNearbyEvents } from '../../data/mockEvents';
 import { MainStackParamList } from '../../navigation/types';
 
 type MapScreenNavigationProp = StackNavigationProp<MainStackParamList>;
@@ -40,7 +41,7 @@ const MapScreen: React.FC = () => {
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<MockEvent[]>(mockEvents);
   const [loading, setLoading] = useState(true);
   const [locationPermission, setLocationPermission] = useState(false);
 
@@ -48,7 +49,19 @@ const MapScreen: React.FC = () => {
   const markerScale = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    // Load all mock events immediately
+    setEvents(mockEvents);
+    setLoading(false);
+    
+    // Request location permissions and get user location
     requestLocationPermission();
+    
+    // Animate marker appearance
+    Animated.spring(markerScale, {
+      toValue: 1,
+      friction: 5,
+      useNativeDriver: true,
+    }).start();
   }, []);
 
   useEffect(() => {
@@ -122,21 +135,21 @@ const MapScreen: React.FC = () => {
     try {
       setLoading(true);
       
-      // Assuming we have a function to get events within a certain radius
-      // Here we're simulating the query, but you would use PostGIS in Supabase
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(50);
+      // Always display all mock events to ensure markers show up
+      setEvents(mockEvents);
       
-      if (error) {
-        throw error;
+      // You can also filter by region if needed in the future
+      // But for now, we show all events to ensure markers are visible
+      /*
+      if (region) {
+        const nearbyEvents = getNearbyEvents(
+          region.latitude,
+          region.longitude,
+          15 // 15km radius
+        );
+        setEvents(nearbyEvents);
       }
-      
-      if (data) {
-        setEvents(data as Event[]);
-      }
+      */
     } catch (error) {
       console.error('Error fetching events:', error);
       Alert.alert('Error', 'Failed to load events. Please try again.');
@@ -145,8 +158,27 @@ const MapScreen: React.FC = () => {
     }
   };
 
-  const handleMarkerPress = (event: Event) => {
-    navigation.navigate('EventDetail', { eventId: event.id, event });
+  const handleMarkerPress = (event: MockEvent) => {
+    // Convert our mock event to the format expected by the app
+    const eventForNavigation: any = {
+      id: event.id,
+      title: event.title,
+      description: event.description,
+      date: event.date.toISOString(),
+      location: {
+        latitude: event.location.latitude,
+        longitude: event.location.longitude,
+        address: event.location.address
+      },
+      user_id: event.organizer.id,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      source: 'app',
+      images: event.media.filter(m => m.type === 'image').map(m => m.url),
+      media_urls: event.media.map(m => m.url),
+      deep_link: `eventsify://event/${event.id}`
+    };
+    navigation.navigate('EventDetail', { eventId: event.id, event: eventForNavigation });
   };
 
   const handleRegionChange = (newRegion: Region) => {
@@ -154,7 +186,7 @@ const MapScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.BACKGROUND }]}>
+    <SafeAreaWrapper backgroundColor={colors.BACKGROUND}>
       <View style={styles.mapContainer}>
         <MapView
           ref={mapRef}
@@ -162,6 +194,8 @@ const MapScreen: React.FC = () => {
           initialRegion={region}
           onRegionChangeComplete={handleRegionChange}
           showsUserLocation
+          showsCompass={true}
+          showsScale={true}
         >
           {events.map((event) => (
             <Marker
@@ -180,11 +214,17 @@ const MapScreen: React.FC = () => {
                 ]}
               >
                 <FontAwesome5 
-                  name={event.source === 'twitter' ? 'twitter' : 'calendar-alt'} 
+                  name={getIconForCategory(event.category)} 
                   size={16} 
                   color="#FFFFFF" 
                 />
               </Animated.View>
+              <Callout tooltip>
+                <View style={[styles.calloutContainer, { backgroundColor: colors.SURFACE }]}>
+                  <Text style={[styles.calloutTitle, { color: colors.TEXT }]} numberOfLines={1}>{event.title}</Text>
+                  <Text style={[styles.calloutAddress, { color: colors.SECONDARY }]} numberOfLines={1}>{event.location.address}</Text>
+                </View>
+              </Callout>
             </Marker>
           ))}
         </MapView>
@@ -219,7 +259,7 @@ const MapScreen: React.FC = () => {
           <FontAwesome5 name="sync" size={20} color={colors.PRIMARY} />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 };
 
@@ -251,8 +291,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   title: {
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: 22,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, undefined, { fontSize: 22 }),
   },
   themeToggle: {
     width: 40,
@@ -275,14 +314,68 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   markerContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#FFFFFF',
+    borderColor: '#FFF',
+  },
+  calloutContainer: {
+    width: 200,
+    padding: 10,
+    borderRadius: 8,
+    ...SHADOWS.MEDIUM
+  },
+  calloutTitle: {
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, undefined, {
+      fontSize: FONT_SIZE.S,
+      fontWeight: 'bold',
+      marginBottom: 4,
+    }),
+  },
+  calloutAddress: {
+    ...createTextStyle(TYPOGRAPHY.CAPTION, undefined, {
+      fontSize: 12,
+    }),
   },
 });
+
+// Helper function to get an appropriate icon for each event category
+const getIconForCategory = (category: string): string => {
+  switch (category) {
+    case 'Music':
+      return 'music';
+    case 'Food & Drink':
+      return 'utensils';
+    case 'Business':
+      return 'briefcase';
+    case 'Sports':
+      return 'running';
+    case 'Arts & Culture':
+      return 'palette';
+    case 'Charity':
+      return 'hand-holding-heart';
+    case 'Technology':
+      return 'laptop-code';
+    case 'Education':
+      return 'graduation-cap';
+    case 'Health & Wellness':
+      return 'heartbeat';
+    case 'Fashion':
+      return 'tshirt';
+    case 'Community':
+      return 'users';
+    case 'Nightlife':
+      return 'glass-cheers';
+    case 'Travel & Outdoor':
+      return 'mountain';
+    case 'Family & Kids':
+      return 'child';
+    default:
+      return 'calendar-alt';
+  }
+};
 
 export default MapScreen;

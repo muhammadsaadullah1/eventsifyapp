@@ -6,6 +6,7 @@ import { AuthStackParamList } from '../../navigation/types';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { TYPOGRAPHY, SPACING, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
@@ -165,13 +166,11 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XL,
   },
   title: {
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: TYPOGRAPHY.HEADINGS.XL,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, 'XL'),
     marginBottom: SPACING.XS,
   },
   subtitle: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: TYPOGRAPHY.BODY.SIZE,
+    ...createTextStyle(TYPOGRAPHY.BODY),
   },
   form: {
     flex: 1,
@@ -195,8 +194,9 @@ const styles = StyleSheet.create({
   },
   dividerText: {
     paddingHorizontal: SPACING.M,
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 12,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 12,
+    }),
   },
   footer: {
     flexDirection: 'row',
@@ -204,10 +204,10 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XL,
   },
   footerText: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
+    ...createTextStyle(TYPOGRAPHY.BODY),
   },
   linkText: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
+    ...createTextStyle(TYPOGRAPHY.BODY),
     fontWeight: '600',
   },
   errorText: {

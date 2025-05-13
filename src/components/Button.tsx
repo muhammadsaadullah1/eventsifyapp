@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS, getThemeColors } from '../constants/theme';
+import { createTextStyle } from '../utils/styleUtils';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -101,8 +102,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   text: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: TYPOGRAPHY.LABELS.SIZE,
+    ...createTextStyle(TYPOGRAPHY.LABELS),
     fontWeight: '600',
     textAlign: 'center',
   },

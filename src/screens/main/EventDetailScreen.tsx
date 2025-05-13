@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   Image,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MainStackParamList } from '../../navigation/types';
@@ -19,7 +19,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '../../contexts/ThemeContext';
-import { THEMES, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../constants/theme';
+import { TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
+import SafeAreaWrapper from '../../components/SafeAreaWrapper';
 import supabase from '../../supabase/supabase';
 import { Event } from '../../types';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
@@ -33,7 +35,7 @@ const EventDetailScreen: React.FC = () => {
   const navigation = useNavigation<EventDetailNavigationProp>();
   const route = useRoute<EventDetailRouteProp>();
   const { mode } = useTheme();
-  const colors = mode === 'vividSunset' ? THEMES.VIVID_SUNSET : THEMES.COOL_AQUA;
+  const colors = getThemeColors(mode);
   
   const { eventId, event: initialEvent } = route.params;
   const [event, setEvent] = useState<Event | null>(initialEvent || null);
@@ -112,7 +114,7 @@ const EventDetailScreen: React.FC = () => {
   };
 
   const navigateNextImage = () => {
-    if (!event || !event.media_urls.length) return;
+    if (!event || !event.media_urls || !event.media_urls.length) return;
     
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     
@@ -138,13 +140,13 @@ const EventDetailScreen: React.FC = () => {
 
   if (!event) {
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: colors.BACKGROUND }]}>
+      <SafeAreaWrapper backgroundColor={colors.BACKGROUND} barStyle={mode.includes('dark') ? 'light-content' : 'dark-content'}>
         <View style={styles.loadingContainer}>
           <Text style={[styles.loadingText, { color: colors.TEXT }]}>
             {loading ? 'Loading event details...' : 'Event not found'}
           </Text>
         </View>
-      </SafeAreaView>
+      </SafeAreaWrapper>
     );
   }
 
@@ -152,7 +154,7 @@ const EventDetailScreen: React.FC = () => {
   const eventTime = new Date(event.created_at).toLocaleTimeString();
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.BACKGROUND }]}>
+    <SafeAreaWrapper backgroundColor={colors.BACKGROUND} barStyle={mode.includes('dark') ? 'light-content' : 'dark-content'}>
       <Animated.View style={[styles.header, headerAnimatedStyle]}>
         <TouchableOpacity 
           style={[styles.backButton, { backgroundColor: colors.SURFACE }]}
@@ -287,7 +289,7 @@ const EventDetailScreen: React.FC = () => {
           </View>
         </Animated.View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 };
 
@@ -302,8 +304,7 @@ const styles = StyleSheet.create({
     padding: SPACING.L,
   },
   loadingText: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: TYPOGRAPHY.BODY.SIZE,
+    ...createTextStyle(TYPOGRAPHY.BODY),
   },
   header: {
     flexDirection: 'row',
@@ -313,10 +314,11 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     flex: 1,
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: 18,
-    textAlign: 'center',
-    marginHorizontal: SPACING.S,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, undefined, {
+      fontSize: 18,
+      textAlign: 'center',
+      marginHorizontal: SPACING.S,
+    }),
   },
   backButton: {
     width: 36,
@@ -389,9 +391,10 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.S,
   },
   metaText: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 14,
-    marginLeft: SPACING.XS,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 14,
+      marginLeft: SPACING.XS,
+    }),
   },
   tagsContainer: {
     flexDirection: 'row',
@@ -406,14 +409,15 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XS,
   },
   tagText: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 12,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 12,
+    }),
   },
   eventDescription: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: TYPOGRAPHY.BODY.SIZE,
-    lineHeight: 24,
-    marginBottom: SPACING.L,
+    ...createTextStyle(TYPOGRAPHY.BODY, undefined, {
+      lineHeight: 24,
+      marginBottom: SPACING.L,
+    }),
   },
   mapSection: {
     borderRadius: BORDER_RADIUS.M,
@@ -421,9 +425,10 @@ const styles = StyleSheet.create({
     ...SHADOWS.SMALL,
   },
   sectionTitle: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 16,
-    marginBottom: SPACING.S,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 16,
+      marginBottom: SPACING.S,
+    }),
   },
   mapContainer: {
     marginBottom: SPACING.M,
@@ -434,8 +439,9 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.S,
   },
   addressText: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: 14,
+    ...createTextStyle(TYPOGRAPHY.BODY, undefined, {
+      fontSize: 14,
+    }),
   },
   directionsButton: {
     flexDirection: 'row',
@@ -445,8 +451,9 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS.M,
   },
   directionsButtonText: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 16,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 16,
+    }),
     color: '#FFFFFF',
     marginLeft: SPACING.S,
   },

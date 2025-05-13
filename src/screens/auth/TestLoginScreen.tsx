@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Animated, Easing } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
 import { THEMES, TYPOGRAPHY, SPACING, BORDER_RADIUS, COLORS, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
 import { useTheme } from '../../contexts/ThemeContext';
 import { TEST_USER } from '../../utils/testAuth';
 
@@ -204,18 +205,20 @@ const styles = StyleSheet.create({
     maxWidth: 400,
   },
   title: {
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: 42,
-    fontWeight: 'bold',
-    marginBottom: SPACING.XS,
-    textAlign: 'center',
-    letterSpacing: 1.5,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, undefined, {
+      fontSize: 42,
+      fontWeight: 'bold',
+      marginBottom: SPACING.XS,
+      textAlign: 'center',
+      letterSpacing: 1.5,
+    }),
   },
   subtitle: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: 16,
-    marginBottom: SPACING.L,
-    textAlign: 'center',
+    ...createTextStyle(TYPOGRAPHY.BODY, undefined, {
+      fontSize: 16,
+      marginBottom: SPACING.L,
+      textAlign: 'center',
+    }),
   },
   card: {
     padding: SPACING.L,
@@ -228,10 +231,11 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   cardTitle: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 18,
-    marginBottom: SPACING.M,
-    textAlign: 'center',
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 18,
+      marginBottom: SPACING.M,
+      textAlign: 'center',
+    }),
   },
   credentialRow: {
     flexDirection: 'row',
@@ -239,13 +243,15 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.M,
   },
   credentialLabel: {
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 16,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 16,
+    }),
   },
   credentialValue: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: 16,
-    fontWeight: '500',
+    ...createTextStyle(TYPOGRAPHY.BODY, undefined, {
+      fontSize: 16,
+      fontWeight: '500',
+    }),
   },
   button: {
     borderRadius: BORDER_RADIUS.L,
@@ -257,26 +263,29 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#FFFFFF',
-    fontFamily: TYPOGRAPHY.LABELS.fontFamily,
-    fontSize: 18,
-    fontWeight: 'bold',
-    letterSpacing: 0.5,
+    ...createTextStyle(TYPOGRAPHY.LABELS, undefined, {
+      fontSize: 18,
+      fontWeight: 'bold',
+      letterSpacing: 0.5,
+    }),
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
   },
   errorText: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: 14,
-    marginBottom: SPACING.M,
-    textAlign: 'center',
+    ...createTextStyle(TYPOGRAPHY.BODY, undefined, {
+      fontSize: 14,
+      marginBottom: SPACING.M,
+      textAlign: 'center',
+    }),
   },
   note: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: 12,
-    marginTop: SPACING.L,
-    textAlign: 'center',
-    opacity: 0.7,
+    ...createTextStyle(TYPOGRAPHY.BODY, undefined, {
+      fontSize: 12,
+      marginTop: SPACING.L,
+      textAlign: 'center',
+      opacity: 0.7,
+    }),
   },
 });
 

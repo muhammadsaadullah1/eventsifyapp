@@ -5,6 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList } from '../../navigation/types';
 import { useTheme } from '../../contexts/ThemeContext';
 import { TYPOGRAPHY, SPACING, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
 import Button from '../../components/Button';
 
 type WelcomeScreenNavigationProp = StackNavigationProp<
@@ -67,13 +68,11 @@ const styles = StyleSheet.create({
     marginTop: SPACING.XXL,
   },
   appName: {
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: TYPOGRAPHY.HEADINGS.XXL,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, 'XXL'),
     marginBottom: SPACING.XS,
   },
   tagline: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: TYPOGRAPHY.BODY.SIZE,
+    ...createTextStyle(TYPOGRAPHY.BODY),
     textAlign: 'center',
   },
   illustrationContainer: {

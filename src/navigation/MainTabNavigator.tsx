@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { getThemeColors } from '../constants/theme';
 
 // Import screens from central export file
-import { MapScreen, CreateEventScreen, ProfileScreen } from '../screens/main';
+import { MapScreen, CreateEventScreen, ProfileScreen, ExploreScreen } from '../screens/main';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -39,6 +39,15 @@ const MainTabNavigator: React.FC = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="map-marked-alt" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Explore"
+        component={ExploreScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="search-location" size={size} color={color} />
           ),
         }}
       />

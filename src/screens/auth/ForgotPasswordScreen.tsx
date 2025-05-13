@@ -5,7 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList } from '../../navigation/types';
 import { useTheme } from '../../contexts/ThemeContext';
 import supabase from '../../supabase/supabase';
-import { THEMES, TYPOGRAPHY, SPACING } from '../../constants/theme';
+import { THEMES, TYPOGRAPHY, SPACING, getThemeColors } from '../../constants/theme';
+import { createTextStyle } from '../../utils/styleUtils';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
@@ -17,7 +18,7 @@ type ForgotPasswordScreenNavigationProp = StackNavigationProp<
 const ForgotPasswordScreen: React.FC = () => {
   const navigation = useNavigation<ForgotPasswordScreenNavigationProp>();
   const { mode } = useTheme();
-  const colors = mode === 'vividSunset' ? THEMES.VIVID_SUNSET : THEMES.COOL_AQUA;
+  const colors = getThemeColors(mode);
   
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -126,13 +127,11 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XL,
   },
   title: {
-    fontFamily: TYPOGRAPHY.HEADINGS.fontFamily,
-    fontSize: TYPOGRAPHY.HEADINGS.XL,
+    ...createTextStyle(TYPOGRAPHY.HEADINGS, 'XL'),
     marginBottom: SPACING.XS,
   },
   subtitle: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
-    fontSize: TYPOGRAPHY.BODY.SIZE,
+    ...createTextStyle(TYPOGRAPHY.BODY),
   },
   form: {
     flex: 1,
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XL,
   },
   linkText: {
-    fontFamily: TYPOGRAPHY.BODY.fontFamily,
+    ...createTextStyle(TYPOGRAPHY.BODY),
     fontWeight: '600',
   },
   errorText: {
